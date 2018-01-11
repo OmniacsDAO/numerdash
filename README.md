@@ -1,4 +1,4 @@
-<a href="https://omnianalytics.io" target="_blank"><img src="images/OAG_CLR_web_small.png" align="right"/></a>
+<a href="https://omnianalytics.io" target="_blank"><img src="images/omni_numerai.png" align="right"/></a>
 
 # Numerai Dashboard 
 > R Shiny Web Interface for Analyzing Numerai Results
@@ -36,3 +36,7 @@ If you use R or another R GUI other than RStudio, run the following lines to exe
     
     ## Render the RMD file
     rmarkdown::run("numerdash.Rmd")
+    
+## API Key
+
+You must generate a Numerai API key and insert the Public ID and Secret Key into the app, and press Go. Alternatively, if you press Go with the fields left blank, the app will use a default API key.
