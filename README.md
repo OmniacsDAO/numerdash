@@ -7,7 +7,7 @@
 
 We are hosting a version of the Dashboard at the following URL:
 
-    https://labs.omnianalytics.io/numerdash
+https://labs.omnianalytics.io/numerdash
     
 For optimal performance, you can run your own instance of the dashboard. This requires R 3.4.x and associated R packages.
 
