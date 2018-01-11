@@ -5,7 +5,7 @@
 
 # Running the Dashboard
 
-We are hosting a version of the Dashboard at the following URL:
+We are hosting our own instance of the dashboard at the following URL:
 
 https://labs.omnianalytics.io/numerdash
     
