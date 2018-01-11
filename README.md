@@ -1,7 +1,7 @@
 <a href="https://omnianalytics.io" target="_blank"><img src="images/omni_numerai.png" align="right"/></a>
 
 # Numerai Dashboard 
-> R Shiny Web Interface for Analyzing Numerai Results
+> R Shiny Web Interface for Analyzing Numerai Tournament Performance
 
 # Running the Dashboard
 
