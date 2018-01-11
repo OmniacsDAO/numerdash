@@ -5,7 +5,7 @@ output:
     orientation: rows
     vertical_layout: fill
     social: menu
-    source_code: https://github.com/Omni-Analytics-Group/Rnumerai
+    source_code: https://github.com/Omni-Analytics-Group/numerdash
     theme: united
     css: css/styles.css
     logo: images/omni_numerai.png
@@ -50,8 +50,8 @@ observeEvent(input$api_data_go, {
     my_pub_id <- input$pub_id
     my_sec_key <- input$sec_key
     
-    res1 <- try(set_public_id(my_pub_id))
-    res2 <- try(set_api_key(my_sec_key))
+    res1 <- try(set_public_id(my_pub_id), silent = TRUE)
+    res2 <- try(set_api_key(my_sec_key), silent = TRUE)
     
     if (inherits(res1, "try-error") || inherits(res2, "try-error")) {
         my_pub_id <- readLines("data/pub_id.txt")
