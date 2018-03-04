@@ -140,7 +140,8 @@ renderPlotly({
                 ggplotly(ggplot(data = data,
                             aes(x = round, y = rank)) +
                             geom_point() +
-                            geom_line() + 
+                            geom_line() +
+                            scale_x_continuous(breaks = pretty(data$round, n = 10)) +
                             ylab("Rank") +
                             xlab("Round Number") +
                             theme(
@@ -177,6 +178,21 @@ renderValueBox({
 
                     ## Return the value for value box
                     valueBox(sum(as.numeric(as.character(data_fetch$uinfo$Payments$NMR))), icon = "fa-gg-circle")
+                })
+```
+
+### Number of rounds participated
+
+```{r}
+renderValueBox({
+                    ## Return Null if no user information loaded
+                    if(is.null(data_fetch$uinfo$Username)) return(NULL)
+
+                    ## Prepare data set and preformatiing
+                    data1 <- data_fetch$round_res[data_fetch$round_res$Username == data_fetch$uinfo$Username,]
+
+                    ## Return the value for value box
+                    valueBox(nrow(data1), icon = "fa-gg-circle")
                 })
 ```
 
@@ -239,6 +255,21 @@ renderValueBox({
 
                     ## Return the value for value box
                     valueBox(value, icon = "fa-gg-circle")
+                })
+```
+
+### # Rounds better than random Live Logloss
+
+```{r}
+renderValueBox({
+                    ## Return Null if no user information loaded
+                    if(is.null(data_fetch$uinfo$Username)) return(NULL)
+
+                    ## Prepare data set and preformatiing
+                    data2 <- data_fetch$round_res[data_fetch$round_res$Username == data_fetch$uinfo$Username,]
+
+                    ## Return the value for value box
+                    valueBox(sum(data2$Live_Logloss < abs(log(.5)),na.rm=TRUE), icon = "fa-gg-circle")
                 })
 ```
 
@@ -305,6 +336,7 @@ renderPlotly({
                             aes_string(x = "round", y = "rank",group = "Username", colour = "Username")) +
                             geom_point() + 
                             geom_line() +
+                            scale_x_continuous(breaks = pretty(data$round, n = 10)) +
                             ylab("Rank") +
                             xlab("Round Number") +
                             theme(
@@ -332,6 +364,7 @@ renderPlotly({
                             aes_string(x = "round", y = "Live_Logloss",group = "Username", colour = "Username")) +
                             geom_point() + 
                             geom_line() +
+                            scale_x_continuous(breaks = pretty(data$round, n = 10)) +
                             geom_hline(yintercept=-log(0.5)) +
                             ylab("Live Logloss") +
                             xlab("Round Number") +
@@ -360,6 +393,7 @@ renderPlotly({
                             aes_string(x = "round", y = "Validation_Logloss",group = "Username", colour = "Username")) +
                             geom_point() + 
                             geom_line() +
+                            scale_x_continuous(breaks = pretty(data$round, n = 10)) +
                             geom_hline(yintercept=-log(0.5)) +
                             ylab("Validation Logloss") +
                             xlab("Round Number") +
@@ -389,6 +423,7 @@ renderPlotly({
                             aes_string(x = "round", y = "Paid_USD",group = "Username", colour = "Username")) +
                             geom_point() + 
                             geom_line() +
+                            scale_x_continuous(breaks = pretty(data$round, n = 10)) +
                             ylab("Total USD Earned") +
                             xlab("Round Number") +
                             theme(
@@ -416,6 +451,7 @@ renderPlotly({
                             aes_string(x = "round", y = "Paid_NMR",group = "Username", colour = "Username")) +
                             geom_point() + 
                             geom_line() +
+                            scale_x_continuous(breaks = pretty(data$round, n = 10)) +
                             ylab("NMR Earned") +
                             xlab("Round Number") +
                             theme(
@@ -443,6 +479,7 @@ renderPlotly({
                             aes_string(x = "round", y = "Consistency",group = "Username", colour = "Username")) +
                             geom_point() + 
                             geom_line() +
+                            scale_x_continuous(breaks = pretty(data$round, n = 10)) +
                             ylab("Consistency") +
                             xlab("Round Number") +
                             theme(
@@ -476,9 +513,11 @@ renderDataTable({
                                 `USD Earned (Main)` = sum(Paid_USD),
                                 `USD Earned (Staked)` = sum(Stake_Paid),
                                 `Total NMR Destroyed` = sum(Stake_Amount[Stake_Destroyed],na.rm=TRUE),
+                                `Total NMR Earned` = sum(Paid_NMR,na.rm=TRUE),
                                 `Average Overfitting Differentiation` = sum(((Live_Logloss-Validation_Logloss)^2)[!is.na(Live_Logloss)])^.5,
                                 `# Rounds with Earnings` = sum(Paid_NMR>0),
                                 `# Rounds with Stake Winnings` = sum(Stake_Paid>0),
+                                `Average Amount of NMR staked` = ifelse(length(Stake_Amount[Stake_Amount>0])==0,0,mean(Stake_Amount[Stake_Amount>0],na.rm=TRUE)),
                                 `Average Confidence across staked rounds` = mean(Stake_Confidence,na.rm=TRUE)
                             ) -> data_out
 
@@ -518,6 +557,7 @@ renderPlotly({
                                     aes_string(x = "round",y="value",colour="key")) +
                                     geom_line()+
                                     geom_point()+
+                                    scale_x_continuous(breaks = pretty(data$round, n = 15)) +
                                     scale_y_continuous(breaks = seq(0, max(2000, max(data$value)), by = 200)) +
                                     ylab("Number of Submissions") +
                                     xlab("Round Number") +
@@ -557,6 +597,7 @@ renderPlotly({
                                     aes_string(x = "round",y="value",colour="key")) +
                                     geom_line()+
                                     geom_point()+
+                                    scale_x_continuous(breaks = pretty(data$round, n = 15)) +
                                     scale_y_continuous(breaks=seq(0,1,by=.0005))+
                                     ylab("Live Log-Loss") +
                                     xlab("Round Number") +
@@ -593,6 +634,7 @@ renderPlotly({
                                     aes_string(x = "round",y="value",colour="key")) +
                                     geom_line()+
                                     geom_point()+
+                                    scale_x_continuous(breaks = pretty(data$round, n = 15)) +
                                     scale_y_continuous(breaks = seq(0, 100, by = 10)) +
                                     ylab("Percentage of Submissions") +
                                     xlab("Round Number") +
@@ -660,6 +702,7 @@ renderPlotly({
                                     aes_string(x = "round", y = "value",colour="key")) +
                                     geom_point() + 
                                     geom_line() +
+                                    scale_x_continuous(breaks = pretty(data$round, n = 15)) +
                                     scale_y_continuous(breaks = seq(0, 5000, by = 500)) +
                                     ylab("NMR") +
                                     xlab("Round Number") +
@@ -699,6 +742,7 @@ renderPlotly({
                                     aes_string(x = "round", y = "value",colour="key")) +
                                     geom_point() + 
                                     geom_line() +
+                                    scale_x_continuous(breaks = pretty(data$round, n = 15)) +
                                     scale_y_continuous() +
                                     ylab("Confidence") +
                                     xlab("Round Number") +
