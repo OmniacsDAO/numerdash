@@ -51,4 +51,4 @@ You must generate a Numerai API key with the following scopes (at a minimum):
 - read_submission_info
 - read_user_info
     
-Once generated, insert the Public ID and Secret Key into the app, and press Go. Alternatively, if you press Go with the fields left blank, the app will use a default API key.
+Once generated, insert your Public ID and Secret Key into the app, and press Go. Alternatively, if you press Go with the fields left blank, the app will use a default API key.
