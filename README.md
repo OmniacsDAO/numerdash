@@ -3,7 +3,7 @@
 # Numerai Dashboard 
 > R Shiny Web Interface for Analyzing Numerai Tournament Performance
 
-<a href="https://labs.omnianalytics.io/numerdash" target="_blank"><img src="images/test.png"/></a>
+<a href="https://labs.omnianalytics.io/numerdash" target="_blank"><img src="images/numerdash_screenshot.png"/></a>
 
 # Running the Dashboard
 
