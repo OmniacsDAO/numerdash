@@ -21,6 +21,7 @@ For optimal performance, you can run your own instance of the dashboard. This re
     install.packages("flexdashboard")
     install.packages("plotly")
     install.packages("dplyr")
+    install.packages("tidyr")
     install.packages("DT")
     install.packages("ggridges")
     
