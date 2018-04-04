@@ -9,7 +9,7 @@
 
 We are hosting our own instance of the dashboard at the following URL:
 
-https://crypto.omnianalytics.io/numerdash
+https://crypto.omnianalytics.io/apps/numerdash/
     
 For optimal performance, you can run your own instance of the dashboard. This requires R 3.4.x and associated R packages.
 
